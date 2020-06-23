@@ -2,6 +2,15 @@ provider "aws" {
   region                  = "${var.aws_region}"
 }
 
+
+#Campo para uso de profile-aws
+
+# provider "aws" {
+#   region                  = "${var.aws_region}"
+#   shared_credentials_file = "/Users/tf_user/.aws/creds"
+#   profile                 = "customprofile"
+# }
+
 terraform {
   backend "s3" {
     bucket = "exemplo-sqs-terraform"
@@ -9,6 +18,8 @@ terraform {
     region = "sa-east-1"
   }
 }
+
+
 
 resource "aws_sqs_queue" "main" {
   name                        = "${var.aws_sqs_name}.fifo"
