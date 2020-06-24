@@ -5,7 +5,6 @@ FROM golang:${GO_VERSION}-alpine AS builder
 
 RUN apk update && apk add alpine-sdk git && rm -rf /var/cache/apk/*
 
-RUN mkdir -p /api
 WORKDIR /api
 
 COPY go.mod .
@@ -19,7 +18,6 @@ FROM alpine:${ALPINE_VERSION}
 
 RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 
-RUN mkdir -p /service
 WORKDIR /api
 COPY --from=builder /api/service .
 
